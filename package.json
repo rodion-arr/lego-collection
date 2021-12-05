@@ -6,6 +6,8 @@
     "@testing-library/jest-dom": "^5.16.0",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
+    "axios": "^0.24.0",
+    "dotenv": "^10.0.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-scripts": "4.0.3",
@@ -13,9 +15,11 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "prebuild": "npm run collection:get",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "collection:get": "node bin/get-collection.js"
   },
   "eslintConfig": {
     "extends": [
