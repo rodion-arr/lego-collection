@@ -54,7 +54,7 @@ console.log('Getting collection');
 
         // write DB file
         await fs.writeFile(
-            join(__dirname, '..', 'public', 'db.json'),
+            join(__dirname, '..', 'src', 'db.json'),
             JSON.stringify(resultDb),
             {encoding: 'utf-8'}
         );
