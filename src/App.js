@@ -21,7 +21,7 @@ function App() {
                   loading="lazy"
                   alt=""
                 />
-              <div className="catalog-item__title">({legoSetId}) {set.name}</div>
+              <div className="catalog-item__title">({legoSetId.replace('-1', '')}) {set.name}</div>
             </div>
           )
         })}
