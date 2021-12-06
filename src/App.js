@@ -18,8 +18,8 @@ function App() {
                 <img
                   className="catalog-item__logo"
                   src={set.img}
-                  alt={`image for ${legoSetId} ${set.name}`}
                   loading="lazy"
+                  alt=""
                 />
               <div className="catalog-item__title">({legoSetId}) {set.name}</div>
             </div>
@@ -30,8 +30,9 @@ function App() {
         <a
           href="https://github.com/rodion-arr/lego-collection"
           target="_blank"
+          rel="noreferrer"
         >
-          <img className="gh-logo" src={ghLogo} alt=""/>
+          <img className="gh-logo" src={ghLogo} alt="" />
         </a>
       </footer>
     </div>
