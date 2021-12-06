@@ -14,6 +14,7 @@
     "web-vitals": "^1.1.2"
   },
   "scripts": {
+    "prestart": "npm run collection:get",
     "start": "react-scripts start",
     "prebuild": "npm run collection:get",
     "build": "react-scripts build",

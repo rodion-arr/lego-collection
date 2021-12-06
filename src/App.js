@@ -14,7 +14,7 @@ function App() {
         {Object.keys(db).map((legoSetId) => {
           const set = db[legoSetId];
           return (
-            <div className="catalog_item catalog-item">
+            <div className="catalog_item catalog-item" key={legoSetId}>
                 <img
                   className="catalog-item__logo"
                   src={set.img}
