@@ -8,6 +8,7 @@
   font-size: 16px;
   font-weight: bold;
   margin-bottom: 10px;
+  cursor: pointer;
 }
 
 .filter__list {
@@ -15,7 +16,6 @@
   height: 0;
   opacity: 0;
   transition: all 0.2s;
-  cursor: pointer;
 }
 
 .filter__list--expanded {
@@ -28,6 +28,10 @@
   flex-wrap: wrap;
   gap: 10px;
   max-width: 500px;
+}
+
+.filter__checkbox-label {
+  cursor: pointer;
 }
 
 .filter__buttons {

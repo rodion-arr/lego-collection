@@ -56,7 +56,7 @@ export const Filter = ({ themes, onFilterChange }) => {
         </div>
         <div className="filter__checkboxes">
           {themes.map((theme, i) => (
-            <label key={i}>
+            <label className="filter__checkbox-label" key={i}>
               <input
                 type="checkbox"
                 className="filter__checkbox"
