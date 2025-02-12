@@ -2,8 +2,18 @@ import logo from './assets/img/logo.svg';
 import ghLogo from './assets/img/github-logo.svg';
 import './App.css';
 import db from './db.json';
+import { useCallback, useState } from 'react';
+import { useThemes } from './hooks/themes.hook';
+import { Filter } from './components/Filter/Filter';
 
 function App() {
+  const [setsToRender, setSetsToRender] = useState(Object.values(db));
+  const themes = useThemes(db);
+
+  const onFilterChange = useCallback((enabledThemes) => {
+    setSetsToRender(Object.values(db).filter((setItem) => enabledThemes[setItem.themeName]));
+  }, []);
+
   return (
     <div className="App">
       <header className="top-menu">
@@ -12,14 +22,16 @@ function App() {
         </div>
         <div className="top-menu__title">My LEGO collection</div>
       </header>
+
+      <Filter themes={themes} onFilterChange={onFilterChange} />
+
       <section className="catalog">
-        {Object.keys(db).map((legoSetId) => {
-          const set = db[legoSetId];
+        {setsToRender.map((set) => {
           return (
-            <div className="catalog_item catalog-item" key={legoSetId}>
+            <div className="catalog_item catalog-item" key={set.id}>
               <img className="catalog-item__logo" src={set.img} loading="lazy" alt="" />
               <div className="catalog-item__title">
-                ({legoSetId.replace('-1', '')}) {set.name}
+                ({set.id.replace('-1', '')}) {set.name}
               </div>
             </div>
           );

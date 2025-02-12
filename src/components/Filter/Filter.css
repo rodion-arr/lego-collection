@@ -1,0 +1,41 @@
+.filter {
+  margin: 20px 20px;
+  border-bottom: 1px solid rgb(224, 224, 224);
+}
+
+.filter__title {
+  text-align: left;
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.filter__list {
+  margin-bottom: 10px;
+  height: 0;
+  opacity: 0;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+.filter__list--expanded {
+  opacity: 1;
+  height: auto;
+}
+
+.filter__checkboxes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  max-width: 500px;
+}
+
+.filter__buttons {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 10px;
+}
+
+.filter__button {
+  margin-right: 10px;
+}

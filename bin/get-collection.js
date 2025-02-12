@@ -29,6 +29,26 @@ console.log('Getting collection');
     });
     const token = tokenResponse.data.user_token;
 
+    // get all themes
+    const themesById = {};
+    const themesUrl = `${apiBase}/lego/themes/?page_size=1000`;
+    const themesResponse = await axios.get(themesUrl, {
+      headers: {
+        Authorization: `key ${apiToken}`,
+      },
+    });
+    themesResponse.data.results.forEach((themeItem) => {
+      const { id, name, parent_id } = themeItem;
+
+      const themeName = themesById[parent_id]?.detailedName || name;
+
+      themesById[id] = {
+        id,
+        detailedName: name,
+        themeName,
+      };
+    });
+
     // get all sets
     const setsUrl = `${apiBase}/users/${token}/sets/`;
     const setResponse = await axios.get(setsUrl, {
@@ -42,9 +62,18 @@ console.log('Getting collection');
     setResponse.data.results.forEach((setItem) => {
       const { set } = setItem;
 
+      const themeName = themesById[set.theme_id]?.themeName || 'Unknown theme';
+
+      if (themeName === 'Unknown theme') {
+        debugger;
+      }
+
       resultDb[set.set_num] = {
+        id: set.set_num,
         name: set.name,
         img: set.set_img_url,
+        themeId: set.theme_id,
+        themeName,
       };
     });
 
