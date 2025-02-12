@@ -20,7 +20,11 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "collection:get": "node bin/get-collection.js"
+    "collection:get": "node bin/get-collection.js",
+    "pretest": "npm run lint",
+    "lint": "npm run prettier:check",
+    "prettier:check": "prettier --check \"**/*.{ts,js}\"",
+    "prettier:fix": "prettier --write \"**/*.{ts,js}\""
   },
   "eslintConfig": {
     "extends": [
@@ -39,5 +43,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "prettier": "^3.5.0"
   }
 }
