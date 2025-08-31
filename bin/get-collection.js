@@ -50,6 +50,8 @@ console.log('Getting collection');
     });
 
     // get all sets
+    const resultDb = {};
+
     const setsUrl = `${apiBase}/users/${token}/sets/`;
     const setResponse = await axios.get(setsUrl, {
       headers: {
@@ -57,16 +59,28 @@ console.log('Getting collection');
       },
     });
 
-    const resultDb = {};
+    setResponse.data.results.forEach(processSet);
 
-    setResponse.data.results.forEach((setItem) => {
+    await processNextPage(setResponse);
+
+    async function processNextPage(setResponseObj) {
+      if (setResponseObj.data.next) {
+        const nextSetResponse = await axios.get(setResponse.data.next, {
+          headers: {
+            Authorization: `key ${apiToken}`,
+          },
+        });
+
+        nextSetResponse.data.results.forEach(processSet);
+
+        await processNextPage(nextSetResponse);
+      }
+    }
+
+    function processSet(setItem) {
       const { set } = setItem;
 
       const themeName = themesById[set.theme_id]?.themeName || 'Unknown theme';
-
-      if (themeName === 'Unknown theme') {
-        debugger;
-      }
 
       resultDb[set.set_num] = {
         id: set.set_num,
@@ -75,7 +89,7 @@ console.log('Getting collection');
         themeId: set.theme_id,
         themeName,
       };
-    });
+    }
 
     // write DB file
     await fs.writeFile(join(__dirname, '..', 'src', 'db.json'), JSON.stringify(resultDb), { encoding: 'utf-8' });
